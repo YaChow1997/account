@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--接口的全路径作为命名空间  -->
+<mapper namespace="com.account.mapper.UserMapper">
+    <resultMap type="com.account.entity.User" id="userMap">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="password" column="password" />
+        <result property="email" column="email" />
+        <result property="role_id" column="role_id" />
+        <result property="telecode" column="telecode" />
+        <result property="card_num" column="card_num" />
+        <result property="picture" column="picture" />
+        <result property="address" column="address" />
+        <result property="birthday" column="birthday" />
+        <result property="create_time" column="create_time" />
+    </resultMap>
+    <!-- 此处select标签的id值对应Mapper类中方法名 -->
+    <insert id="addUser" parameterType="com.account.entity.User">
+        insert into t_user(name,password,role_id,email,telecode,create_time,picture,address,card_num) values(#{name},#{password},#{role_id},#{email},#{telecode},now(),#{picture},#{address},#{cardNumber});
+    </insert>
+    <select id="queryAll" parameterType="com.account.entity.User" resultType="com.account.dto.UserDto">
+        select * from t_user
+        left join t_role
+        on user.role_id=role.id
+        <where>
+            <if test="name!=null">
+                and user.name=#{name}
+            </if>
+            <if test="telecode!=null">
+                and user.telecode=#{telecode}
+            </if>
+            <if test="role_id!=null">
+                and user.role_id=#{role_id}
+            </if>
+        </where>
+        order by t_user.create_time asc
+    </select>
+
+    <delete id="deleteUser" parameterType="java.lang.String">
+        delete from t_user where email=#{email}
+    </delete>
+
+    <update id="updateUser" parameterType="com.account.entity.User">
+        update t_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="password!=null">
+                password=#{password},
+            </if>
+            <if test="email!=null">
+                email=#{email},
+            </if>
+            <if test="roleId!=null">
+                role_id=#{role_id},
+            </if>
+            <if test="phone!=null">
+                telecode=#{telecode},
+            </if>
+            <if test="picture!=null">
+                picture=#{picture},
+            </if>
+            <if test="address!=null">
+                address=#{address},
+            </if>
+            <if test="birthday!=null">
+                birthday=#{birthday},
+            </if>
+            <if test="cardNumber!=null">
+                card_num=#{cardNumber},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+    <select id="queryByUserId" parameterType="java.lang.Integer" resultType="com.account.entity.User">
+        <!-- 此处写sql语句,#{Mapper类传入的参数} -->
+        select * from t_user where id = #{id}
+    </select>
+    <update id="changePassword" parameterType="com.account.dto.UserDto">
+      update t_user set password=#{password} where id=#{id}
+    </update>
+    <select id="queryAllUsers" parameterType="com.account.entity.User" resultType="com.account.entity.User">
+        select * from t_user
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+            <if test="role_id!=null">
+                and role_id=#{role_id}
+            </if>
+        </where>
+    </select>
+    <select id="getUserByName" parameterType="string" resultMap="userMap">
+        <!-- 此处写sql语句,#{Mapper类传入的参数} -->
+        select * from t_user where name = #{name}
+    </select>
+</mapper>
