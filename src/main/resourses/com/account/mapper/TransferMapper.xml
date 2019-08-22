@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--接口的全路径作为命名空间  -->
+<mapper namespace="com.account.mapper.TransferMapper">
+    <select id="queryAllTransfer"  resultType="com.account.entity.Transfer">
+		select t_transfer.* ,user1.`name` as sponsorName,user2.`name` as recieverName
+		from t_transfer
+		left join t_user as user1
+		on user1.id=t_transfer.sponsor_id
+		left join t_user as user2
+		on user2.id=t_transfer.reciever_id
+		<where>
+			t_transfer.is_delete='0'
+			<if test="sponsor_id!=null">
+				and t_transfer.sponsor_id=#{sponsor_id}
+			</if>
+		</where>
+	</select>
+	<insert id="addTransfer" parameterType="com.account.entity.Transfer" useGeneratedKeys="true" keyProperty="id" >
+        insert into t_transfer(transfer_num,sponsor_id,reciever_id,transfer_amount,transfer_status,remark,transfer_type,transfer_time)
+        values(#{transfer_num},#{sponsor_id},#{reciever_id},#{transfer_amount},#{transfer_status},#{remark},#{transfer_type},#{transfer_time},#{is_delete})
+    </insert>
+	<update id="updateTransfer" parameterType="com.account.entity.Transfer">
+		update t_transfer set transfer_num= #{transfer_num},sponsor_id=#{sponsor_id},reciever_id=#{reciever_id},transfer_amount=#{transfer_amount},transfer_status=#{transfer_status},remark=#{remark},transfer_type=#{transfer_type},transfer_time=#{transfer_time},is_delete=#{is_delete}
+		where id=#{id}
+	</update>
+	<delete id="deleteTransfer" parameterType="java.lang.Integer">
+        update t_transfer
+        set is_delete='1'
+        where id=#{id}
+    </delete>
+
+</mapper>

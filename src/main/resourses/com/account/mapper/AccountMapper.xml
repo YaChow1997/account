@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--接口的全路径作为命名空间  -->
+<mapper namespace="com.account.mapper.AccountMapper">
+    <select id="getAllAccount" resultType="com.account.dto.AccountDto">
+        select t_account.* ,user1.`name` as accountName
+        from t_account
+        left join t_user as user1
+        on user1.id=t_account.user_id
+        <where>
+            t_account.is_delete='0'
+            <if test="user_id!=null">
+                and t_account.user_id=#{user_id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addAccount" parameterType="com.account.entity.Account">
+        insert into t_account(account_num,user_id,balance,password,open_money,open_time,is_lock)
+        values(#{account_num},#{user_id},#{balance},#{password},#{open_money},#{open_time},#{is_lock})
+    </insert>
+
+    <update id="updateAccount" parameterType="com.account.entity.Account">
+        update t_account
+        <trim prefix="set" suffixOverrides=",">
+            <if test="account_num!=null">
+                account_num=#{account_num},
+            </if>
+            <if test="balance!=null">
+                balance=#{balance},
+            </if>
+            <if test="password!=null">
+                password=#{password},
+            </if>
+            <if test="open_money!=null">
+                open_money=#{open_money},
+            </if>
+            <if test="open_time!=null">
+                open_time=#{open_time},
+            </if>
+            <if test="is_lock!=null">
+                is_lock=#{is_lock},
+            </if>
+            <if test="is_delete!=null">
+                is_delete=#{is_delete}
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+    <select id="queryByUserId" parameterType="java.lang.Integer" resultType="com.account.entity.Account">
+        select * from t_account
+        where user_id=#{user_id} and is_delete='0'
+    </select>
+    <select id="queryAccounts" parameterType="java.util.Map" resultType="com.account.dto.AccountDto">
+        select t_account.*,user.name,user.email,user.telecode,user.card_num,user.address,user.birthday from t_account
+        left join user
+        on user.id=t_account.user_id
+        <where>
+            <if test="is_delete!=null">
+                account.is_delete=#{is_delete}
+            </if>
+            <if test="name!=null">
+                and user.name like CONCAT('%',#{name},'%')
+            </if>
+            <if test="beginTime!=null">
+                and DATE_FORMAT(account.open_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginTime},'%Y-%m-%d')
+            </if>
+            <if test="endTime!=null">
+                and DATE_FORMAT(account.open_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime},'%Y-%m-%d')
+            </if>
+            <if test="is_lock!=null">
+                and account.is_lock=#{is_lock}
+            </if>
+        </where>
+    </select>
+    <select id="queryAccountById" parameterType="java.lang.Integer" resultType="com.account.entity.Account">
+        select * from t_account where user_id=#{id}
+    </select>
+
+    <update id="changePassword" parameterType="com.account.entity.Account">
+      update t_account set password=#{t_account.password} where account_num=#{t_account.account_num}
+    </update>
+</mapper>

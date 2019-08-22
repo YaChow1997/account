@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--接口的全路径作为命名空间  -->
+<mapper namespace="com.account.mapper.NewsMapper">
+    <select id="getAllNews"  resultType="com.account.entity.News">
+			select t_news.* ,user1.`name` as creator
+			from t_news
+			left join t_user as user1
+			on user1.id=t_news.user_id
+			<where>
+				t_news.is_delete='0'
+				<if test="user_id!=null">
+					and t_news.user_id=#{user_id}
+				</if>
+			</where>
+	</select>
+
+	<select id="getContent" parameterType="int" resultType="com.account.entity.News">
+			select * from t_news
+			where id=#{id}
+	</select>
+
+	<insert id="addNews" parameterType="com.account.entity.News" >
+	    insert into t_news(head,body,user_id,creator,create_time,update_time,order_index)
+	    values(#{head},#{body},#{user_id},#{creator},#{create_time},#{update_time},#{order_index})
+	</insert>
+
+	<update id="updateNews" parameterType="com.account.entity.News">
+		update t_news
+		<trim prefix="set" suffixOverrides=",">
+			<if test="head!=null">
+				head=#{head},
+			</if>
+			<if test="body!=null">
+				body=#{body},
+			</if>
+			<if test="update_time!=null">
+				update_time=#{update_time},
+			</if>
+			<if test="order_index!=null">
+				order_index=#{order_index},
+			</if>
+			<if test="is_delete!=null">
+				is_delete=#{is_delete},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
+	<delete id="deleteNews" parameterType="int" >
+	    update t_news
+        set is_delete='1'
+        where id=#{id}
+	</delete>
+
+</mapper>
