@@ -87,4 +87,20 @@ public class UserCtrl extends BaseCtrl{
         session.setAttribute("user", user);
         return this.send(userService.updateUser(user));
     }
+
+    @PostMapping("/register")
+    public Result addUser(User user){
+        user.setPassword(user.getPassword());
+        user.setRole_id(1);
+        int result=0;
+        try {
+            result = userService.addUser(user);
+        }catch (Exception e){
+            return this.send(-1,"注册失败");
+        }
+        if(result==0){
+            return this.send(-1,"注册失败");
+        }
+        return this.send(null);
+    }
 }

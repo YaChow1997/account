@@ -30,7 +30,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a href="index1.jsp" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>管理</b>员</span>
             <!-- logo for regular state and mobile devices -->
@@ -141,7 +141,6 @@
                     <ul class="treeview-menu">
                         <li><a href="<c:url value="/pages/admin/newslist.jsp"/>">新闻列表<i class="fa fa-newspaper-o"></i></a></li>
                         <li><a href="<c:url value="/pages/admin/addnews.jsp"/>">添加新闻<i class="fa fa-plus-square"></i></a></li>
-                        <li><a href="<c:url value="/pages/admin/updatenews.jsp"/>">修改新闻<i class="fa fa-plus-square"></i></a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -286,7 +285,7 @@
                             "<td>"+(data.data[i].recieverName==null?'空':data.data[i].recieverName)+"</td>\n"+
                             "<td>"+data.data[i].transfer_amount+"</td>\n"+
                             "<td>"+(data.data[i].transfer_status == 0?'已取消': data.data[i].transfer_status == 1?'已完成': data.data[i].transfer_status == 2?'处理中':'')+"</td>\n"+
-                            "<td>"+data.data[i].remark+"</td>\n"+
+                            "<td>"+(data.data[i].remark==null?'空':data.data[i].remark)+"</td>\n"+
                             "<td>"+(data.data[i].transfer_type == 0?'存款': data.data[i].transfer_type == 1?'取款': data.data[i].transfer_type == 2?'转账':'')+"</td>\n"+
                             "<td>"+data.data[i].transfer_time+"</td>\n"+
                             "<td><button  type='button' class='btn btn-danger btn-sm deleteBtn' transferId='"+data.data[i].id+"'>删除</button></td>\n"

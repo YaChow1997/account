@@ -20,4 +20,6 @@ public interface UserMapper {
      public User queryByUserId(Integer id);
 
      public int deleteUser(String email);
+
+     public int addUser(User user);
 }

@@ -67,7 +67,7 @@
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            <a href="login.jsp" class="text-center">已有账号？返回登陆</a>
+                            <a href="login.jsp" class="text-center">已注册？去登陆</a>
                         </label>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                 success:function(data){
                 if(data.status.code==1){
                 alert("注册成功,返回登录");
-                window.location.href="register.jsp";
+                window.location.href="login.jsp";
                 return;
                 }
                 if(data.status.code==-1){

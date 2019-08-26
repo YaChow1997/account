@@ -115,7 +115,7 @@ public class AccountCtrl extends BaseCtrl{
             return this.send(-6,"账户已冻结！");
         }
         Transfer transfer=new Transfer();
-        transfer.setSponsor_id(account.getId());
+        transfer.setSponsor_id(account.getUser_id());
         transfer.setReciever_id(transferDto.getToUserId());
         transfer.setRemark(transferDto.getRemark());
         transfer.setTransfer_amount(transferDto.getTransfer_amount());
@@ -128,6 +128,21 @@ public class AccountCtrl extends BaseCtrl{
         }
         return this.send(null);
     }
+
+    @GetMapping("/toDeposit")
+    public ModelAndView toDeposit(HttpSession session){
+        User user=(User)session.getAttribute("user");
+        ModelAndView modelAndView2=new ModelAndView();
+        modelAndView2.setViewName("client/deposit");
+        User user2=new User();
+        user2.setRole_id(1);
+        /*查询所有客户*/
+        modelAndView2.addObject("users",userService.queryAllUsers(user2));
+        Account account=accountService.queryByUserId(user.getId());
+        modelAndView2.addObject("account",account);
+        return modelAndView2;
+    }
+
     @RequestMapping("/deposit")
     @ResponseBody
     public Result deposit(TransferDto transferDto, HttpSession session){
@@ -140,7 +155,7 @@ public class AccountCtrl extends BaseCtrl{
             return this.send(-2,"账户已冻结！");
         }
         Transfer transfer=new Transfer();
-        transfer.setSponsor_id(account.getId());
+        transfer.setSponsor_id(account.getUser_id());
         transfer.setTransfer_amount(transferDto.getTransfer_amount());
         try {
             accountService.deposit(transfer,transferDto.getPassword());
@@ -151,6 +166,21 @@ public class AccountCtrl extends BaseCtrl{
         }
         return this.send(null);
     }
+
+    @GetMapping("/toWithdraw")
+    public ModelAndView toWithdraw(HttpSession session){
+        User user=(User)session.getAttribute("user");
+        ModelAndView modelAndView3=new ModelAndView();
+        modelAndView3.setViewName("client/withdraw");
+        User user3=new User();
+        user3.setRole_id(1);
+        /*查询所有客户*/
+        modelAndView3.addObject("users",userService.queryAllUsers(user3));
+        Account account=accountService.queryByUserId(user.getId());
+        modelAndView3.addObject("account",account);
+        return modelAndView3;
+    }
+
     @RequestMapping("/withdraw")
     @ResponseBody
     public Result withdraw(TransferDto transferDto, HttpSession session){
@@ -163,7 +193,7 @@ public class AccountCtrl extends BaseCtrl{
             return this.send(-2,"账户已冻结！");
         }
         Transfer transfer=new Transfer();
-        transfer.setSponsor_id(account.getId());
+        transfer.setSponsor_id(account.getUser_id());
         transfer.setTransfer_amount(transferDto.getTransfer_amount());
         try {
             accountService.withdraw(transfer,transferDto.getPassword());
@@ -209,6 +239,5 @@ public class AccountCtrl extends BaseCtrl{
         modelAndView.addObject("account",account);
         return modelAndView;
     }
-
 
 }

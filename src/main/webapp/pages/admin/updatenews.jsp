@@ -31,7 +31,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a href="index1.jsp" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>管理</b>员</span>
             <!-- logo for regular state and mobile devices -->
@@ -142,7 +142,6 @@
                     <ul class="treeview-menu">
                         <li><a href="<c:url value="/pages/admin/newslist.jsp"/>">新闻列表<i class="fa fa-newspaper-o"></i></a></li>
                         <li><a href="<c:url value="/pages/admin/addnews.jsp"/>">添加新闻<i class="fa fa-plus-square"></i></a></li>
-                        <li><a href="<c:url value="/pages/admin/updatenews.jsp"/>">修改新闻<i class="fa fa-plus-square"></i></a></li>
                     </ul>
                 </li>
                 <li class="treeview">

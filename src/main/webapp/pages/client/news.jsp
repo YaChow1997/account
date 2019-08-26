@@ -21,26 +21,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -48,7 +29,7 @@ desired effect
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a href="index.jsp" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>客</b>户</span>
             <!-- logo for regular state and mobile devices -->
@@ -158,9 +139,9 @@ desired effect
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<c:url value="/pages/client/deposit.jsp"/>">存款<i class="fa fa-money"></i></a></li>
-                        <li><a href="<c:url value="/pages/client/withdraw.jsp"/>">取款<i class="fa fa-credit-card"></i></a></li>
-                        <li><a href="<c:url value="/accounts/toTransfer"/>">我的业务<i class="fa fa-exchange"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toDeposit"/>">存款<i class="fa fa-money"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toWithdraw"/>">取款<i class="fa fa-credit-card"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toTransfer"/>">转账<i class="fa fa-exchange"></i></a></li>
                     </ul>
                 </li>
                 <li class="treeview">

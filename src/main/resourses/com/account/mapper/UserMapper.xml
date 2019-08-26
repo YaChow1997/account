@@ -20,7 +20,7 @@
     </resultMap>
     <!-- 此处select标签的id值对应Mapper类中方法名 -->
     <insert id="addUser" parameterType="com.account.entity.User">
-        insert into t_user(name,password,role_id,email,telecode,create_time,picture,address,card_num) values(#{name},#{password},#{role_id},#{email},#{telecode},now(),#{picture},#{address},#{cardNumber});
+        insert into t_user(name,password,role_id,email,telecode,create_time,address,card_num) values(#{name},#{password},#{role_id},#{email},#{telecode},now(),#{address},#{card_num});
     </insert>
     <select id="queryAll" parameterType="com.account.entity.User" resultType="com.account.dto.UserDto">
         select * from t_user

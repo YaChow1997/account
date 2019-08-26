@@ -31,7 +31,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a href="#" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>客</b>户</span>
             <!-- logo for regular state and mobile devices -->
@@ -107,9 +107,9 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<c:url value="/pages/client/deposit.jsp"/>">存款<i class="fa fa-money"></i></a></li>
-                        <li><a href="<c:url value="/pages/client/withdraw.jsp"/>">取款<i class="fa fa-credit-card"></i></a></li>
-                        <li><a href="<c:url value="/accounts/toTransfer"/>">我的业务<i class="fa fa-exchange"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toDeposit"/>">存款<i class="fa fa-money"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toWithdraw"/>">取款<i class="fa fa-credit-card"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toTransfer"/>">转账<i class="fa fa-exchange"></i></a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -293,7 +293,7 @@
                 success: function (data) {
                     if(data.status.code==1){
                         alert("存款成功");
-                        window.location.reload();
+                        window.location.href="<c:url value='/accounts/toDeposit'/>";
                     }else{
                         alert(data.status.message);
                     }
@@ -322,7 +322,7 @@
                 success: function (data) {
                     if(data.status.code==1){
                         alert("取款成功");
-                        window.location.href = "<c:url value='/accounts/withdraw'/>";
+                        window.location.href="<c:url value='/accounts/toWithdraw'/>";
                     }else{
                         alert(data.status.message);
                     }
@@ -373,7 +373,7 @@
                 success: function (data) {
                     if(data.status.code==1){
                         alert("转账成功");
-                        window.location.reload();
+                        window.location.href="<c:url value='/accounts/toTransfer'/>";
                     }else{
                         alert(data.status.message);
                     }

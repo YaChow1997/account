@@ -41,4 +41,9 @@ public class UserService {
     public User queryByUserId(Integer id){
         return userMapper.queryByUserId(id);
     }
+
+    @Transactional
+    public int addUser(User user){
+        return userMapper.addUser(user);
+    }
 }
