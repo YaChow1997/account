@@ -65,7 +65,7 @@ public class AccountService {
     @Transactional
     public int transfer(Transfer transfer,Integer password) throws MyException {
         /*该用户扣钱*/
-        Account fromAccount=accountMapper.queryAccountById(transfer.getSponsor_id());
+        Account fromAccount=accountMapper.queryByUserId(transfer.getSponsor_id());
         if(!fromAccount.getPassword().equals(password)){
             throw new MyException("支付密码错误");
         }
@@ -80,7 +80,7 @@ public class AccountService {
         accountMapper.updateAccount(account);
 
         /*收款人加钱*/
-        Account toAccount=accountMapper.queryAccountById(transfer.getReciever_id());
+        Account toAccount=accountMapper.queryByUserId(transfer.getReciever_id());
         Account account1=new Account();
         account1.setId(toAccount.getId());
         account1.setBalance(toAccount.getBalance()+transfer.getTransfer_amount());
@@ -105,7 +105,7 @@ public class AccountService {
     @Transactional
     public int deposit(Transfer transfer,Integer password) throws MyException {
         /*该用户加钱*/
-        Account fromAccount=accountMapper.queryAccountById(transfer.getSponsor_id());
+        Account fromAccount=accountMapper.queryByUserId(transfer.getSponsor_id());
         if(!fromAccount.getPassword().equals(password)){
             throw new MyException("支付密码错误");
         }
@@ -134,7 +134,7 @@ public class AccountService {
     @Transactional
     public int withdraw(Transfer transfer, Integer password) throws MyException {
         /*该用户加钱*/
-        Account fromAccount=accountMapper.queryAccountById(transfer.getSponsor_id());
+        Account fromAccount=accountMapper.queryByUserId(transfer.getSponsor_id());
         if(!fromAccount.getPassword().equals(password)){
             throw new MyException("支付密码错误");
         }

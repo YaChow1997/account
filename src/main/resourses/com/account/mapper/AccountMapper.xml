@@ -77,7 +77,7 @@
         </where>
     </select>
     <select id="queryAccountById" parameterType="java.lang.Integer" resultType="com.account.entity.Account">
-        select * from t_account where user_id=#{id}
+        select * from t_account where id=#{id} and is_delete='0'
     </select>
 
     <update id="changePassword" parameterType="com.account.entity.Account">

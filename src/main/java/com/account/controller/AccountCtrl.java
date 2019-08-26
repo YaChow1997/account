@@ -102,21 +102,21 @@ public class AccountCtrl extends BaseCtrl{
         User user= (User) session.getAttribute("user");
         Account account=accountService.queryByUserId(user.getId());
         if(account==null){
-            return this.send(-1,"该账号未绑定账户，请联系管理员注册账户");
+            return this.send(-1,"该账号未开户");
         }
         Account account1=accountService.queryByUserId(transferDto.getToUserId());
         if(account1==null){
-            return this.send(-2,"该用户不存在账户，请核对收款人信息");
+            return this.send(-2,"收款人未开户");
         }
         if(account.getId().equals(account1.getId())){
-            return this.send(-3,"同一用户不允许转账");
+            return this.send(-3,"同一用户无法转账");
         }
         if(account.getIs_lock().equals("1")){
-            return this.send(-6,"您的账户已被冻结！");
+            return this.send(-6,"账户已冻结！");
         }
         Transfer transfer=new Transfer();
         transfer.setSponsor_id(account.getId());
-        transfer.setReciever_id(account1.getId());
+        transfer.setReciever_id(transferDto.getToUserId());
         transfer.setRemark(transferDto.getRemark());
         transfer.setTransfer_amount(transferDto.getTransfer_amount());
         try {
@@ -134,7 +134,7 @@ public class AccountCtrl extends BaseCtrl{
         User user= (User) session.getAttribute("user");
         Account account=accountService.queryByUserId(user.getId());
         if(account==null){
-            return this.send(-1,"该账号未开户，请到银行开户");
+            return this.send(-1,"该账号未开户");
         }
         if(account.getIs_lock().equals("1")){
             return this.send(-2,"账户已冻结！");
@@ -157,10 +157,10 @@ public class AccountCtrl extends BaseCtrl{
         User user= (User) session.getAttribute("user");
         Account account=accountService.queryByUserId(user.getId());
         if(account==null){
-            return this.send(-1,"该账号未绑定账户，请联系管理员注册账户");
+            return this.send(-1,"该账号未开户");
         }
         if(account.getIs_lock().equals("1")){
-            return this.send(-2,"您的账户已被冻结！");
+            return this.send(-2,"账户已冻结！");
         }
         Transfer transfer=new Transfer();
         transfer.setSponsor_id(account.getId());

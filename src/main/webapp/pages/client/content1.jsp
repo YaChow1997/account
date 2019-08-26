@@ -22,26 +22,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -153,7 +134,7 @@ desired effect
                 <li class="active"><a href="<c:url value="/pages/client/news.jsp"/>"><i class="fa fa-newspaper-o"></i> <span>新闻列表</span></a></li>
                 <li><a href="<c:url value="/pages/client/records.jsp"/>"><i class="fa fa-list"></i> <span>查看交易记录</span></a></li>
                 <li class="treeview">
-                    <a href="<c:url value="/pages/client/transferIndex.jsp"/>"><i class="fa fa-cc-visa"></i> <span>存款/取款/转账</span>
+                    <a href="#"><i class="fa fa-cc-visa"></i> <span>存款/取款/转账</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -161,7 +142,7 @@ desired effect
                     <ul class="treeview-menu">
                         <li><a href="<c:url value="/pages/client/deposit.jsp"/>">存款<i class="fa fa-money"></i></a></li>
                         <li><a href="<c:url value="/pages/client/withdraw.jsp"/>">取款<i class="fa fa-credit-card"></i></a></li>
-                        <li><a href="<c:url value="/pages/client/transfer.jsp"/>">转账<i class="fa fa-exchange"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toTransfer"/>">我的业务<i class="fa fa-exchange"></i></a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -172,7 +153,7 @@ desired effect
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<c:url value="/pages/client/updatepwd.jsp"/>">修改个人密码<i class="fa fa-asterisk"></i></a></li>
-                        <li><a href="<c:url value="/pages/client/updateInfo.jsp"/>">修改个人信息<i class="fa fa-user"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toUpdateInfo"/>">修改个人信息<i class="fa fa-user"></i></a></li>
                     </ul>
                 </li>
             </ul>

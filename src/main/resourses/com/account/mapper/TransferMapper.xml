@@ -21,7 +21,7 @@
 	</select>
 	<insert id="addTransfer" parameterType="com.account.entity.Transfer" useGeneratedKeys="true" keyProperty="id" >
         insert into t_transfer(transfer_num,sponsor_id,reciever_id,transfer_amount,transfer_status,remark,transfer_type,transfer_time)
-        values(#{transfer_num},#{sponsor_id},#{reciever_id},#{transfer_amount},#{transfer_status},#{remark},#{transfer_type},#{transfer_time},#{is_delete})
+        values(#{transfer_num},#{sponsor_id},#{reciever_id},#{transfer_amount},#{transfer_status},#{remark},#{transfer_type},#{transfer_time})
     </insert>
 	<update id="updateTransfer" parameterType="com.account.entity.Transfer">
 		update t_transfer set transfer_num= #{transfer_num},sponsor_id=#{sponsor_id},reciever_id=#{reciever_id},transfer_amount=#{transfer_amount},transfer_status=#{transfer_status},remark=#{remark},transfer_type=#{transfer_type},transfer_time=#{transfer_time},is_delete=#{is_delete}

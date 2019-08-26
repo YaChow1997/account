@@ -109,18 +109,18 @@
                     <ul class="treeview-menu">
                         <li><a href="<c:url value="/pages/client/deposit.jsp"/>">存款<i class="fa fa-money"></i></a></li>
                         <li><a href="<c:url value="/pages/client/withdraw.jsp"/>">取款<i class="fa fa-credit-card"></i></a></li>
-                        <li><a href="<c:url value="/pages/client/transfer.jsp"/>">转账<i class="fa fa-exchange"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toTransfer"/>">我的业务<i class="fa fa-exchange"></i></a></li>
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#"/><i class="fa fa-info"></i> <span>个人信息</span>
+                    <a href="#"><i class="fa fa-info"></i> <span>个人信息</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<c:url value="/pages/client/updatepwd.jsp"/>">修改个人密码<i class="fa fa-asterisk"></i></a></li>
-                        <li><a href="<c:url value="/pages/client/updateInfo.jsp"/>">修改个人信息<i class="fa fa-user"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toUpdateInfo"/>">修改个人信息<i class="fa fa-user"></i></a></li>
                     </ul>
                 </li>
             </ul>
@@ -279,7 +279,10 @@
                 alert("请核实存款金额");
                 return;
             }
-            if(password==""||isNaN(password)){alert("请核实支付密码");return;}
+            if(password==""||isNaN(password)){
+                alert("请核实支付密码");
+                return;
+            }
             var json={transfer_amount:transfer_amount,password:password};
             $.ajax({
                 type: "post",
@@ -347,7 +350,6 @@
         })
         $("#transferBtn").click(function(){
             var toUser_id=$("select[name='user_id']").val();
-            var telecode=$("input[name='telecode']").val();
             var transfer_amount=$("input[name='transfer_amount3']").val();
             var remark=$("textarea[name='remark']").val();
             var password=$("input[name='password3']").val();
@@ -356,16 +358,12 @@
                 return;
             }
             console.log(transfer_amount)
-            // if (!telecode.match("^1[3456789]\\d{9}$")) {
-            //     alert("号码格式错误");
-            //     return;
-            // }
-            // if(!transfer_amount.match("^([1-9]\\d{0,9}|0)([.]?|(\\.\\d{1,2})?)$")){
-            //     alert("请核实转账金额");
-            //     return;
-            // }
-            // if(password==""||isNaN(password)){alert("支付密码未填写");return;}
-            var json={toUserId:toUser_id,telecode:telecode,transfer_amount:transfer_amount,remark:remark,password:password};
+            if(!transfer_amount.match("^([1-9]\\d{0,9}|0)([.]?|(\\.\\d{1,2})?)$")){
+                alert("请核实转账金额");
+                return;
+            }
+            if(password==""||isNaN(password)){alert("支付密码未填写");return;}
+            var json={toUserId:toUser_id,transfer_amount:transfer_amount,remark:remark,password:password};
             $.ajax({
                 type: "post",
                 url: "<c:url value='/accounts/transfer'/>",
@@ -375,6 +373,7 @@
                 success: function (data) {
                     if(data.status.code==1){
                         alert("转账成功");
+                        window.location.reload();
                     }else{
                         alert(data.status.message);
                     }

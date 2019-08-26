@@ -133,7 +133,7 @@
                 <li class="active"><a href="<c:url value="/pages/client/news.jsp"/>"><i class="fa fa-newspaper-o"></i> <span>新闻列表</span></a></li>
                 <li><a href="<c:url value="/pages/client/records.jsp"/>"><i class="fa fa-list"></i> <span>查看交易记录</span></a></li>
                 <li class="treeview">
-                    <a href="<c:url value="/pages/client/transferIndex.jsp"/>"><i class="fa fa-cc-visa"></i> <span>存款/取款/转账</span>
+                    <a href="#"><i class="fa fa-cc-visa"></i> <span>存款/取款/转账</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -141,7 +141,7 @@
                     <ul class="treeview-menu">
                         <li><a href="<c:url value="/pages/client/deposit.jsp"/>">存款<i class="fa fa-money"></i></a></li>
                         <li><a href="<c:url value="/pages/client/withdraw.jsp"/>">取款<i class="fa fa-credit-card"></i></a></li>
-                        <li><a href="<c:url value="/pages/client/transfer.jsp"/>">转账<i class="fa fa-exchange"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toTransfer"/>">我的业务<i class="fa fa-exchange"></i></a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -152,7 +152,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<c:url value="/pages/client/updatepwd.jsp"/>">修改个人密码<i class="fa fa-asterisk"></i></a></li>
-                        <li><a href="<c:url value="/pages/client/updateInfo.jsp"/>">修改个人信息<i class="fa fa-user"></i></a></li>
+                        <li><a href="<c:url value="/accounts/toUpdateInfo"/>">修改个人信息<i class="fa fa-user"></i></a></li>
                     </ul>
                 </li>
             </ul>
