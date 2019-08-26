@@ -56,10 +56,10 @@
             <if test="email!=null">
                 email=#{email},
             </if>
-            <if test="roleId!=null">
+            <if test="role_id!=null">
                 role_id=#{role_id},
             </if>
-            <if test="phone!=null">
+            <if test="telecode!=null">
                 telecode=#{telecode},
             </if>
             <if test="picture!=null">
@@ -71,8 +71,8 @@
             <if test="birthday!=null">
                 birthday=#{birthday},
             </if>
-            <if test="cardNumber!=null">
-                card_num=#{cardNumber},
+            <if test="card_num!=null">
+                card_num=#{card_num},
             </if>
         </trim>
         where id=#{id}
@@ -81,8 +81,8 @@
         <!-- 此处写sql语句,#{Mapper类传入的参数} -->
         select * from t_user where id = #{id}
     </select>
-    <update id="changePassword" parameterType="com.account.dto.UserDto">
-      update t_user set password=#{password} where id=#{id}
+    <update id="changePassword" parameterType="com.account.entity.User">
+      update t_user set password=#{user_new.password} where id=#{user_new.id}
     </update>
     <select id="queryAllUsers" parameterType="com.account.entity.User" resultType="com.account.entity.User">
         select * from t_user

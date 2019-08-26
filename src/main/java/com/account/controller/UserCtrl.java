@@ -43,20 +43,21 @@ public class UserCtrl extends BaseCtrl{
         return modelAndView;
     }
 
-//    @RequestMapping("/changePassword")
-//    public Result changePassword  (@RequestParam(value = "oldPassword")String oldPassword,@RequestParam(value = "password")String password,HttpServletRequest request,HttpServletResponse response)  throws IOException {
-//        HttpSession session = request.getSession();
-//        UserDto user = (UserDto) session.getAttribute("user");
-//        if(!oldPassword.getBytes().equals(user.getPassword())) {
-//            return this.send(-1, "原密码输入错误");
-//        }
-//        UserDto user_new = new UserDto();
-//        user_new.setPassword();
-//        user_new.setId(user.getId());
-//        userService.changePassword(user_new);
+    @RequestMapping("/changePassword")
+    @ResponseBody
+    public Result changePassword(@RequestParam(value = "oldPassword")String oldPassword,@RequestParam(value = "password")String password,HttpServletRequest request,HttpServletResponse response)  throws IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if(!oldPassword.equals(user.getPassword())) {
+            return this.send(-1, "原密码输入错误");
+        }
+        User user_new = new User();
+        user_new.setPassword(password);
+        user_new.setId(user.getId());
+
 //        session.removeAttribute("user");
-//        return this.send(null);
-//    }
+        return this.send(userService.changePassword(user_new));
+    }
     @RequestMapping("/queryByUserId")
     @ResponseBody
     public Result queryByUserId(@RequestParam(value = "id")Integer id){
@@ -72,18 +73,18 @@ public class UserCtrl extends BaseCtrl{
 
     @PostMapping("/updateInfo")
     @ResponseBody
-    public Result updateInfo(User user,HttpServletRequest request,HttpServletResponse response)  throws IOException {
+    public Result updateInfo(User user1, HttpServletRequest request,HttpServletResponse response)  throws IOException {
         HttpSession session = request.getSession();
-        UserDto userdto = (UserDto) session.getAttribute("user");
-        int id=userdto.getId();
-        user.setId(id);
-        userService.updateUser(user);
-        userdto.setCard_num(user.getCard_num());
-        userdto.setEmail(user.getEmail());
-        userdto.setTelecode(user.getTelecode());
-        userdto.setAddress(user.getAddress());
-        userdto.setBirthday(user.getBirthday());
-        session.setAttribute("user", userdto);
+        User user = (User) session.getAttribute("user");
+        int id=user.getId();
+        user1.setId(id);
+        userService.updateUser(user1);
+        user.setCard_num(user1.getCard_num());
+        user.setEmail(user1.getEmail());
+        user.setTelecode(user1.getTelecode());
+        user.setAddress(user1.getAddress());
+        user.setBirthday(user1.getBirthday());
+        session.setAttribute("user", user);
         return this.send(userService.updateUser(user));
     }
 }

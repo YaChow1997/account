@@ -20,6 +20,22 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style type="text/css">
+        .accountInfo{
+            position: relative;
+            left: 33%;
+            top: 10%;
+            width: 1500px;
+        }
+        .change{
+            position: relative;
+            left:-100px;
+            top: 250px;
+            width: 1500px;
+        }
+       .accountDetail input[type="text"]{text-align:center}
+
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -164,21 +180,21 @@
         <!-- Main content -->
         <section class="content container-fluid">
 
-            <div class="row">
+            <div class="accountInfo">
 
                 <div class="col-md-4">
                     <!-- Widget: user widget style 1 -->
                     <div class="box box-widget widget-user">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                         <div class="widget-user-header bg-black" style="background: url('<c:url value="/dist/img/photo1.png"/>') center center;">
-                            <h3 class="widget-user-username">${user.name}</h3>
-                            <h5 class="widget-user-desc">注册于${user.create_time}</h5>
+                            <h3 class="widget-user-username">${sessionScope.user.name}</h3>
+                            <h5 class="widget-user-desc">注册于${sessionScope.user.create_time}</h5>
                         </div>
                         <div class="widget-user-image">
-                            <img src="${user.picture}" class="user-image user_pic" alt="User Image">
+                            <img src="${sessionScope.user.picture}" class="user-image user_pic" alt="User Image">
                         </div>
                         <div class="box-footer">
-                            <div class="row">
+                            <div class="accountDetail">
                                 <div class="col-sm-4 border-right">
                                     <div class="description-block">
                                         <h5 class="description-header">账号</h5>
@@ -190,7 +206,7 @@
                                 <div class="col-sm-4 border-right">
                                     <div class="description-block">
                                         <h5 class="description-header">余额</h5>
-                                        <input type="text" class="form-control" id="balance" value="${account.balance}"  disabled>
+                                        <input type="text" class="form-control" id="balance" value="${account.balance}元"  disabled>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
@@ -198,7 +214,7 @@
                                 <div class="col-sm-4">
                                     <div class="description-block">
                                         <h5 class="description-header">账户状态</h5>
-                                        <input type="text" class="form-control" id="is_lock" value="${account.islock}"  disabled>
+                                        <input type="text" class="form-control" id="is_lock" value="${account.is_lock==0?"正常":"已冻结"}"  disabled>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
@@ -213,17 +229,17 @@
                 <!-- /.col -->
             </div>
             <section class="content">
-                <div class="row">
+                <div class="change">
                     <div class="col-md-6">
                         <!-- About Me Box -->
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">修改信息</h3>
+                                <h3 class="box-title">修改个人信息</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
 
-                                <h5><i class="fa fa-envelope margin-r-5"></i> Email</h5>
+                                <h5><i class="fa fa-envelope margin-r-5"></i> 邮箱</h5>
                                 <div class="form-group has-feedback">
                                     <input type="text" class="form-control" name="email"  value="${sessionScope.user.email}">
                                 </div>
@@ -231,7 +247,7 @@
                                 <h5><i class="fa fa-phone margin-r-5"></i> 联系方式</h5>
 
                                 <div class="form-group has-feedback">
-                                    <input type="text" class="form-control" name="phone" value="${sessionScope.user.telecode}">
+                                    <input type="text" class="form-control" name="telecode" value="${sessionScope.user.telecode}">
                                 </div>
 
                                 <h5><i class="fa fa-paper-plane-o margin-r-5"></i> 所在地址</h5>
@@ -247,8 +263,9 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-3 col-xs-offset-4">
-                                        <button type="button" class="form-control btn btn-primary btn-large  " id="updateInfo">确认修改</button>
+                                    <div class="col-xs-4 col-xs-offset-4" >
+                                        <button type="button" class="btn btn-primary pull-left" id="updateInfo">确认修改</button>
+                                        <button type="button" class="btn btn-primary pull-right updatePwd">修改支付密码</button>
                                     </div>
                                 </div>
                             </div>
@@ -273,6 +290,31 @@
         <strong>Copyright &copy; 2019 <a href="#">Company</a>.</strong> All rights reserved.
     </footer>
 </div>
+
+<div class="modal fade" id="confirmUpdateDialog" tabindex="-1" role="dialog" aria-labelledby="myModelLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">修改支付密码</h4>
+            </div>
+            <div class="modal-body">
+                <label>新密码</label>
+                <input type="text" class="form-control" name="newPassword" id="newPassword" placeholder="新密码">
+                <label>确认密码</label>
+                <input type="text" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="确认密码">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="confirmUpdate">确认修改</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
@@ -294,7 +336,9 @@
         format: 'yyyy-mm-dd',
         setDate:${sessionScope.user.birthday}
     })
-
+    $(".updatePwd").click(function () {
+        $("#confirmUpdateDialog").modal('show');
+    })
     $("#updateInfo").click(function () {
         var email=$("input[name='email']").val();
         var telecode=$("input[name='telecode']").val();
@@ -309,7 +353,7 @@
         console.log(json)
         $.ajax({
             type: "post",
-            url: "<c:url value='/user/updateUser'/>",
+            url: "<c:url value='/user/updateInfo'/>",
             dataType: "json",
             data: json,
             success: function (data) {
@@ -321,7 +365,44 @@
                 }
             }
         })
-
+    })
+    $("#confirmUpdate").click(function () {
+        var password=$("#newPassword").val();
+        var confirmPassword=$("#confirmPassword").val();
+        if(password==""||password==null){
+            alert("新密码不能为空！");
+            return;
+        }
+        if(/^[0-9]{6}$/.test(password)!=1){
+            alert("新密码格式有误！");
+            return;
+        }
+        if(confirmPassword==""||confirmPassword==null){
+            alert("确认密码不能为空！");
+            return;
+        }
+        if(confirmPassword!=password){
+            alert("两次输入的密码不一致");
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            contentType:"application/x-www-form-urlencoded",
+            url: "<c:url value='/accounts/changePassword'/>",
+            data: {"password":password},
+            dataType: "json",
+            success: function(data){
+                    alert("支付密码修改成功！");
+                    $('#password').attr('value', password);
+                    $('#newPassword').val("");
+                    $('#confirmPassword').val("");
+            },
+            error:function(){
+                console.log("发送失败")
+            }
+        });
+        $("#confirmUpdateDialog").modal('hide');
+        window.location.reload();
     })
 </script>
 </body>

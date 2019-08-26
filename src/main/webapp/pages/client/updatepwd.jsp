@@ -20,6 +20,14 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style type="text/css">
+        .changepwd{
+            position: relative;
+            left: 25%;
+            top: 10%;
+            width: 1500px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -167,14 +175,14 @@
         <section class="content container-fluid">
 
             <section class="content">
-                <div class="row">
+                <div class="changepwd">
                     <!-- right column -->
                     <div class="col-md-6">
                         <!-- Horizontal Form -->
                         <!-- general form elements disabled -->
-                        <div class="box box-warning">
+                        <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">修改密码</h3>
+                                <h3 class="box-title">修改登录密码</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -182,20 +190,20 @@
                                     <!-- text input -->
                                     <div class="form-group">
                                         <label>原密码</label>
-                                        <input type="text" class="form-control" id="oldPassword" placeholder="请输入旧密码">
+                                        <input type="text" class="form-control" id="oldPassword" placeholder="请输入原密码">
                                     </div>
                                     <div class="form-group">
                                         <label>新密码</label>
-                                        <input type="text" class="form-control" id="newPassword" placeholder="新密码">
+                                        <input type="text" class="form-control" id="newPassword" placeholder="请输入新密码">
                                     </div>
                                     <div class="form-group">
                                         <label>密码确认</label>
-                                        <input type="text" class="form-control" id="confirmPassword" placeholder="确认密码">
+                                        <input type="text" class="form-control" id="confirmPassword" placeholder="请再输入一次密码">
                                     </div>
                                     <div class="box-footer">
                                         <div class="row">
                                             <div class="col-sm-4 col-sm-offset-2">
-                                                <button type="button" class="form-control btn btn-warning" id="confirmUpdate">确认修改</button>
+                                                <button type="button" class="form-control btn btn-primary" id="confirmUpdate">确认修改</button>
                                             </div>
                                         </div>
                                     </div>
@@ -268,7 +276,7 @@
             $.ajax({
                 type: "POST",
                 contentType:"application/x-www-form-urlencoded",
-                url: "<c:url value='/accounts/changePassword'/>",
+                url: "<c:url value='/user/changePassword'/>",
                 data: {"oldPassword":oldPassword,"password":password},
                 dataType: "json",
                 success: function(data){

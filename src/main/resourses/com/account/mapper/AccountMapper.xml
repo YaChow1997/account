@@ -81,6 +81,6 @@
     </select>
 
     <update id="changePassword" parameterType="com.account.entity.Account">
-      update t_account set password=#{t_account.password} where account_num=#{t_account.account_num}
+      update t_account set password=#{account.password} where user_id=#{account.user_id}
     </update>
 </mapper>

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.ArrayList;
 
 public interface TransferMapper {
-    ArrayList<Transfer> queryAllTransfer(@Param("sponsor_id")Integer sponsor_id);
+    ArrayList<TransferDto> queryAllTransfer(@Param("sponsor_id")Integer sponsor_id);
 
     public Integer getTransferById(@Param("id") Integer id);
 

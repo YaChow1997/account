@@ -13,7 +13,7 @@ public interface UserMapper {
 
      public int updateUser(User user);
 
-     public int changePassword(UserDto user);
+     public int changePassword(@Param("user_new")User user);
 
      public List<User> queryAllUsers(User user);
 

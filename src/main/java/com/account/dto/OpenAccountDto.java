@@ -3,7 +3,7 @@ package com.account.dto;
 public class OpenAccountDto {
     private Integer user_id;
     private String cardNumber;
-    private int telecode;
+    private String telecode;
     private String email;
     private String address;
     private String birthday;
@@ -25,11 +25,11 @@ public class OpenAccountDto {
         this.cardNumber = cardNumber;
     }
 
-    public int getTelecode() {
+    public String getTelecode() {
         return telecode;
     }
 
-    public void setTelecode(int telecode) {
+    public void setTelecode(String telecode) {
         this.telecode = telecode;
     }
 

@@ -225,7 +225,7 @@
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary" id="addAccount">提交</button>
+                        <button type="button" class="btn btn-primary" id="addAccount">提交</button>
                     </div>
                 </form>
             </div>
@@ -325,10 +325,10 @@
                 return;
             }
 
-            if(!money.match("^([1-9]\\d{0,9}|0)([.]?|(\\.\\d{1,2})?)$")){
-                alert("开户金额非法");
-                return;
-            }
+            // if(!money.match("^([1-9]\\d{0,9}|0)([.]?|(\\.\\d{1,2})?)$")){
+            //     alert("开户金额非法");
+            //     return;
+            // }
             $.ajax({
                 type: "post",
                 url: "<c:url value='/accounts/addAccount'/>" ,
@@ -336,8 +336,14 @@
                 data: {"user_id":user_id,"email":email,"telecode":telecode,"cardNumber":card_num,"money":open_money},
                 dataType: "json",
                 success: function (data) {
+                    if(data.status.code==1){
                         alert("开设成功");
-                        window.location.reload();
+                    }else{
+                        alert(data.status.message);
+                    }
+                },
+                error:function(){
+                    alert("发送失败");
                 }
             });
         })

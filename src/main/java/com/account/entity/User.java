@@ -8,7 +8,7 @@ public class User {
     private String password;
     private String email;
     private Integer role_id;
-    private Integer telecode;
+    private String telecode;
     private String card_num;
     private String picture;
     private String address;
@@ -55,11 +55,11 @@ public class User {
         this.role_id = role_id;
     }
 
-    public Integer getTelecode() {
+    public String getTelecode() {
         return telecode;
     }
 
-    public void setTelecode(Integer telecode) {
+    public void setTelecode(String telecode) {
         this.telecode = telecode;
     }
 

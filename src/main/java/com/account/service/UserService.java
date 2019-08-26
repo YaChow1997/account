@@ -25,7 +25,7 @@ public class UserService {
     }
 
     @Transactional
-    public int changePassword (UserDto user){
+    public int changePassword (User user){
         return userMapper.changePassword(user);
     }
 

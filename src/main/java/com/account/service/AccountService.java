@@ -43,6 +43,7 @@ public class AccountService {
         accountMapper.addAccount(account);
         return account;
     }
+
     public Account queryByAccountNumber(String account_num){
         return accountMapper.queryByAccountNumber(account_num);
     }

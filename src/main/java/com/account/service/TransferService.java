@@ -28,7 +28,7 @@ public class TransferService {
 
     public Map<String,Object> queryAllTransfer(Integer pageNumber,Integer pageSize,Integer sponsor_id) {
         PageHelper.startPage(pageNumber,pageSize);
-        List<Transfer> transfers=transferMapper.queryAllTransfer(sponsor_id);
+        List<TransferDto> transfers=transferMapper.queryAllTransfer(sponsor_id);
         PageInfo pageInfo=new PageInfo(transfers);
         Map<String,Object> result=new HashMap<>();
         result.put("data",transfers);
@@ -38,7 +38,7 @@ public class TransferService {
     }
     public Map<String,Object> getTransferBysponsorId(Integer pageNumber,Integer pageSize,Integer sponsor_id) {
         PageHelper.startPage(pageNumber,pageSize);
-        List<Transfer> transfers1=transferMapper.queryAllTransfer(sponsor_id);
+        List<TransferDto> transfers1=transferMapper.queryAllTransfer(sponsor_id);
         PageInfo pageInfo=new PageInfo(transfers1);
         Map<String,Object> result=new HashMap<>();
         result.put("data",transfers1);

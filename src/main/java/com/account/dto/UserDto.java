@@ -1,23 +1,24 @@
 package com.account.dto;
 
 public class UserDto {
-    private int id;
+    private Integer id;
     private String name;
-    private int password;
+    private String password;
     private String email;
-    private int role_id;
-    private int telecode;
-    private String card_num;
-    private String image;
-    private String address;
+    private String role_id;
+    private String telecode;
+    private String number;
+    private String roleName;
+    private String picture;
     private String birthday;
-    private String  create_time;
+    private String address;
+    private String card_num;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -29,12 +30,11 @@ public class UserDto {
         this.name = name;
     }
 
-
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -46,44 +46,44 @@ public class UserDto {
         this.email = email;
     }
 
-    public int getRole_id() {
+    public String getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(int role_id) {
+    public void setRole_id(String role_id) {
         this.role_id = role_id;
     }
 
-    public int getTelecode() {
+    public String getTelecode() {
         return telecode;
     }
 
-    public void setTelecode(int telecode) {
+    public void setTelecode(String telecode) {
         this.telecode = telecode;
     }
 
-    public String getCard_num() {
-        return card_num;
+    public String getNumber() {
+        return number;
     }
 
-    public void setCard_num(String card_num) {
-        this.card_num = card_num;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getImage() {
-        return image;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public String getBirthday() {
@@ -94,11 +94,19 @@ public class UserDto {
         this.birthday = birthday;
     }
 
-    public String getCreate_time() {
-        return create_time;
+    public String getAddress() {
+        return address;
     }
 
-    public void setCreate_time(String create_time) {
-        this.create_time = create_time;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCard_num() {
+        return card_num;
+    }
+
+    public void setCard_num(String card_num) {
+        this.card_num = card_num;
     }
 }

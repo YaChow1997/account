@@ -150,13 +150,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">存款金额</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="transfer_amount" placeholder="请输入存款金额">
+                                    <input type="text" class="form-control" name="transfer_amount1" placeholder="请输入存款金额">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">支付密码</label>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control" name="password" placeholder="请输入支付密码">
+                                    <input type="password" class="form-control" name="password1" placeholder="请输入支付密码">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -178,13 +178,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">取款金额</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="tranMoney" placeholder="请输入取款金额">
+                                    <input type="text" class="form-control" name="transfer_amount2" placeholder="请输入取款金额">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">支付密码</label>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control" name="password" placeholder="请输入支付密码">
+                                    <input type="password" class="form-control" name="password2" placeholder="请输入支付密码">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -217,13 +217,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">转账金额</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="transfer_amount" placeholder="请输入转账金额">
+                                    <input type="text" class="form-control" name="transfer_amount3" placeholder="请输入转账金额">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">支付密码</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="password" placeholder="请输入密码">
+                                    <input type="text" class="form-control" name="password3" placeholder="请输入密码">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -234,7 +234,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger"  id="transferBtn">转账</button>
+                                    <button type="button" class="btn btn-danger"  id="transferBtn">转账</button>
                                 </div>
                             </div>
                         </form>
@@ -273,8 +273,8 @@
 <script>
     $(document).ready(function () {
         $("#depositBtn").click(function(){
-            var transfer_amount=$("input[name='transfer_amount']").val();
-            var password=$("input[name='password']").val();
+            var transfer_amount=$("input[name='transfer_amount1']").val();
+            var password=$("input[name='password1']").val();
             if(!transfer_amount.match("^([1-9]\\d{0,9}|0)([.]?|(\\.\\d{1,2})?)$")){
                 alert("请核实存款金额");
                 return;
@@ -302,8 +302,8 @@
         })
 
         $("#withdrawBtn").click(function(){
-            var transfer_amount=$("input[name='transfer_amount']").val();
-            var password=$("input[name='password']").val();
+            var transfer_amount=$("input[name='transfer_amount2']").val();
+            var password=$("input[name='password2']").val();
             if(!transfer_amount.match("^([1-9]\\d{0,9}|0)([.]?|(\\.\\d{1,2})?)$")){
                 alert("取款金额格式有误");
                 return;
@@ -319,7 +319,7 @@
                 success: function (data) {
                     if(data.status.code==1){
                         alert("取款成功");
-                        window.location.href = "<c:url value=''/>";
+                        window.location.href = "<c:url value='/accounts/withdraw'/>";
                     }else{
                         alert(data.status.message);
                     }
@@ -348,13 +348,14 @@
         $("#transferBtn").click(function(){
             var toUser_id=$("select[name='user_id']").val();
             var telecode=$("input[name='telecode']").val();
-            var transfer_amount=$("input[name='transfer_amount']").val();
+            var transfer_amount=$("input[name='transfer_amount3']").val();
             var remark=$("textarea[name='remark']").val();
-            var password=$("input[name='password']").val();
+            var password=$("input[name='password3']").val();
             if (toUser_id==null||toUser_id=="") {
                 alert("请选择用户");
                 return;
             }
+            console.log(transfer_amount)
             // if (!telecode.match("^1[3456789]\\d{9}$")) {
             //     alert("号码格式错误");
             //     return;
@@ -364,7 +365,7 @@
             //     return;
             // }
             // if(password==""||isNaN(password)){alert("支付密码未填写");return;}
-            var json={reciever_id:toUser_id,telecode:telecode,transfer_amount:transfer_amount,remark:remark,password:password};
+            var json={toUserId:toUser_id,telecode:telecode,transfer_amount:transfer_amount,remark:remark,password:password};
             $.ajax({
                 type: "post",
                 url: "<c:url value='/accounts/transfer'/>",

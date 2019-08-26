@@ -45,6 +45,7 @@ public class AccountCtrl extends BaseCtrl{
     }
 
     @PostMapping("/addAccount")
+    @ResponseBody
     public Result addAccount(OpenAccountDto openAccountDto, HttpServletRequest request){
         if(accountService.queryByUserId(openAccountDto.getUser_id())!=null){
             return this.send(-1,"该用户已存在账号");
@@ -96,6 +97,7 @@ public class AccountCtrl extends BaseCtrl{
     }
 
     @RequestMapping("/transfer")
+    @ResponseBody
     public Result transfer(TransferDto transferDto, HttpSession session){
         User user= (User) session.getAttribute("user");
         Account account=accountService.queryByUserId(user.getId());
@@ -127,6 +129,7 @@ public class AccountCtrl extends BaseCtrl{
         return this.send(null);
     }
     @RequestMapping("/deposit")
+    @ResponseBody
     public Result deposit(TransferDto transferDto, HttpSession session){
         User user= (User) session.getAttribute("user");
         Account account=accountService.queryByUserId(user.getId());
@@ -149,9 +152,10 @@ public class AccountCtrl extends BaseCtrl{
         return this.send(null);
     }
     @RequestMapping("/withdraw")
+    @ResponseBody
     public Result withdraw(TransferDto transferDto, HttpSession session){
-        UserDto userDto= (UserDto) session.getAttribute("user");
-        Account account=accountService.queryByUserId(userDto.getId());
+        User user= (User) session.getAttribute("user");
+        Account account=accountService.queryByUserId(user.getId());
         if(account==null){
             return this.send(-1,"该账号未绑定账户，请联系管理员注册账户");
         }
@@ -172,9 +176,11 @@ public class AccountCtrl extends BaseCtrl{
     }
 
     @RequestMapping("/changePassword")
-    public Result changePassword (@RequestParam(value = "password")Integer password,@RequestParam(value = "account_num")String account_num) {
+    @ResponseBody
+    public Result changePassword (@RequestParam(value = "password")Integer password,HttpSession session) {
+        User user=(User)session.getAttribute("user");
         Account account=new Account();
-        account.setAccount_num(account_num);
+        account.setUser_id(user.getId());
         account.setPassword(password);
         return this.send(accountService.changePassword(account));
     }

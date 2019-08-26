@@ -283,7 +283,7 @@
                             "<td>"+(i+1)+"</td>\n" +
                             "<td>"+data.data[i].transfer_num+"</td>\n" +
                             "<td>"+data.data[i].sponsorName+"</td>\n"+
-                            "<td>"+data.data[i].recieverName+"</td>\n"+
+                            "<td>"+(data.data[i].recieverName==null?'空':data.data[i].recieverName)+"</td>\n"+
                             "<td>"+data.data[i].transfer_amount+"</td>\n"+
                             "<td>"+(data.data[i].transfer_status == 0?'已取消': data.data[i].transfer_status == 1?'已完成': data.data[i].transfer_status == 2?'处理中':'')+"</td>\n"+
                             "<td>"+data.data[i].remark+"</td>\n"+
