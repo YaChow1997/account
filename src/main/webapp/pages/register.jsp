@@ -50,10 +50,13 @@
                 <input type="email" class="form-control" placeholder="邮箱" name="email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
-
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="身份证号" name="card_num">
                 <span class="glyphicon glyphicon-paperclip form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="地址" name="address">
+                <span class="glyphicon glyphicon-home form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <input type="password" class="form-control" placeholder="密码" name="password">
@@ -61,7 +64,7 @@
             </div>
             <div class="form-group has-feedback">
                 <input type="password" class="form-control" placeholder="确认密码" name="confirmPassword">
-                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                <span class="glyphicon glyphicon-alert form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-xs-8">
@@ -102,6 +105,7 @@
             var password=$("input[name='password']").val();
             var card_num=$("input[name='card_num']").val();
             var telecode=$("input[name='telecode']").val();
+            var address=$("input[name='address']").val();
             var confirmPassword=$("input[name='confirmPassword']").val();
             if (name==null||name=="") {
                 alert("姓名不能为空");
@@ -127,21 +131,11 @@
                 type: "post",
                 contentType:"application/x-www-form-urlencoded",
                 url: "<c:url value='/user/register'/>",
-                data: {"name":name,"email":email,"password":password,"telecode":telecode,"card_num":card_num},
+                data: {"name":name,"email":email,"password":password,"telecode":telecode,"address":address,"card_num":card_num},
                 dataType: "json",
-                success:function(data){
-                if(data.status.code==1){
-                alert("注册成功,返回登录");
-                window.location.href="login.jsp";
-                return;
-                }
-                if(data.status.code==-1){
-                alert("注册失败");
-                return;
-                }
-                alert(data.status.message);
-                }
             })
+            alert("注册成功！")
+            window.location.reload();
         })
     });
 </script>
